@@ -29,7 +29,7 @@ export default function CadastroProdutos(){
         }
 
         try{
-            const response = await fetch("http://localhost:3000/api/base-produtos",cabecalho)
+            const response = await fetch("http://localhost:3000/api/",cabecalho)
 
             if(response.ok){
                 alert(`${produto.nome} cadastrado com sucesso!`)
