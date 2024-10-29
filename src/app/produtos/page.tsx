@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
 import Modal from "./cad-produtos/Modal"
+import Cabecalho from "../components/Cabecalho"
 
 export default function Produtos(){
 
@@ -48,6 +49,9 @@ export default function Produtos(){
 
     return(
         <main className="grow p-5">
+
+            <Cabecalho/>
+            
             <h1 className="text-center text-4xl font-bold text-indigo-600 mb-4">Produtos</h1>
             <table className="w-2/3 m-auto">
                 <thead className="bg-slate-900 text-white">

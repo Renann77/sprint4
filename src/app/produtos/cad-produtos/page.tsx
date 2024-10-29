@@ -1,4 +1,6 @@
 "use client"
+import Cabecalho from "@/app/components/Cabecalho";
+import Footer from "@/app/components/Footer";
 import { TipoProduto } from "@/types";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -45,6 +47,9 @@ export default function CadastroProdutos(){
 
     return(
         <main className="grow">
+
+            <Cabecalho/>
+
             <h1 className="text-3xl text-center font-bold mb-2 text-indigo-600">Cadastro de Produtos</h1>
             <p className="text-xl text-center font-semibold mb-4">Aqui inserimos um novo produto assim que chega na loja.</p>
             <form className="w-1/3 m-auto p-2 border border-indigo-950 rounded-md" onSubmit={handleSubmit}>
@@ -65,6 +70,8 @@ export default function CadastroProdutos(){
                 </div>
                 <button className="bg-green-700 text-white text-xl p-2 ms-auto me-2 block rounded-md" type="submit">Cadastrar Produto</button>
             </form>
+
+            <Footer/>
         </main>
     )
 }
