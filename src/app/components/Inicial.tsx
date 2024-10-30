@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import inicial from "/public/images/imageminicial.png";
 import bot from "/public/images/icone bot.png";
@@ -24,7 +23,7 @@ function Inicial() {
                         <div className="p-6 text-white">
                             <h2 className="text-4xl mb-4">Área do Cliente</h2>
                             <p className="text-gray-400 mb-6">Queremos que você encontre todas as respostas que procura por aqui. Tudo de forma simples, prática e ágil. Do nosso jeito LRI.</p>
-                            <a href="">
+                            <a href="/login">
                                 <button className="bg-[#C0A554] text-black px-6 py-3 rounded-full shadow-md hover:bg-[#9e8b4d] transition-all duration-300">Login</button>
                             </a>
                         </div>
@@ -39,7 +38,7 @@ function Inicial() {
                             <div className="bg-black bg-opacity-70 rounded-2xl p-6 text-center text-white backdrop-blur-md shadow-lg transition-transform duration-300 hover:translate-y-[-5px]">
                                 <h3 className="text-lg mb-4 opacity-85">Ainda não possui conta?</h3>
                                 <p className="text-gray-400 mb-4">Clique no ícone abaixo para realizar seu cadastro!</p>
-                                <button className="bg-[#C0A554] text-white px-6 py-3 rounded-full shadow-md hover:bg-[#9e8b4d] transition-all duration-300">Cadastrar</button>
+                                <a href="/cadastro"><button className="bg-[#C0A554] text-white px-6 py-3 rounded-full shadow-md hover:bg-[#9e8b4d] transition-all duration-300">Cadastrar</button></a>
                             </div>
                         </div>
                     </div>
