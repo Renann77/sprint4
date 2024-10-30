@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Cabecalho from '../components/Cabecalho';
 import Footer from '../components/Footer';
 
-
 interface CartItem {
   name: string;
   price: number;
@@ -17,27 +16,35 @@ interface TipoProduto {
   price: number;
 }
 
-
-
 const products: TipoProduto[] = [
   { id: 1, name: "Pastilhas de Freio", image: "/images/pastilhasfreio.jpeg", price: 149.99 },
-  { id: 2, name: "Óleo do Motor", image: "/images/filtro-de-oleo.jpeg", price: 79.90 },
+  { id: 2, name: "Óleo do Motor", image: "/images/filtro de oleo.jpeg", price: 79.90 },
   { id: 3, name: "Porta de Carro", image: "/images/portadecarro.jpg", price: 760.00 },
   { id: 4, name: "Pneu", image: "/images/pneu.jpg", price: 429.90 },
   { id: 5, name: "Retrovisor", image: "/images/retrovisor.jpg", price: 220.00 },
   { id: 6, name: "Para-Brisa", image: "/images/parabrisa.jpg", price: 109.90 },
   { id: 7, name: "Bancos", image: "/images/banco.jpg", price: 3599.90 },
-  { id: 8, name: "Kit Chave de Rodas", image: "/images/kit.jpg", price: 169.99 },
-  { id: 9, name: "Rádio Automotivo", image: "/images/radio.jpg", price: 499.99 },
-  { id: 10, name: "Amortecedor", image: "/images/amortecedor.jpg", price: 219.90 },
-  { id: 11, name: "Câmera de Ré", image: "/images/camera.jpg", price: 189.00 },
-  { id: 12, name: "Filtro de Ar", image: "/images/filtroar.jpg", price: 59.90 },
-  { id: 13, name: "Macaco Hidráulico", image: "/images/macaco.jpg", price: 129.90 },
+  { id: 8, name: "Kit Chave de Rodas", image: "/images/kit.jpg", price: 169.99 }
+];
+
+// Exemplo de feedback de clientes
+const feedbacks = [
+  { productId: 1, userName: "João", rating: 4, comment: "Ótima qualidade!" },
+  { productId: 2, userName: "Maria", rating: 5, comment: "Recomendo a todos!" },
+];
+
+// Histórico de compras
+const purchaseHistory = [
+  { date: "2024-10-01", items: [{ name: "Pneu", price: 429.90 }, { name: "Óleo do Motor", price: 79.90 }] },
+  { date: "2024-09-15", items: [{ name: "Pastilhas de Freio", price: 149.99 }] },
 ];
 
 export default function ShopPage() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [quickViewProduct, setQuickViewProduct] = useState<TipoProduto | null>(null);
+  const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
 
   const addToCart = (itemName: string, itemPrice: number) => {
     setCart([...cart, { name: itemName, price: itemPrice }]);
@@ -52,19 +59,68 @@ export default function ShopPage() {
     setIsCartOpen(false);
   };
 
+  const getFeaturedProducts = (): TipoProduto[] => {
+    return products.filter((product) => product.price > 300);
+  };
+
+  const getDiscountedProducts = (discountRate: number): TipoProduto[] => {
+    return products.map((product) => ({
+      ...product,
+      price: parseFloat((product.price * (1 - discountRate)).toFixed(2)),
+    }));
+  };
+
+  const getProductFeedbacks = (productId: number) => {
+    return feedbacks.filter((feedback) => feedback.productId === productId);
+  };
+
+  const filterProducts = (): TipoProduto[] => {
+    return products.filter((product) =>
+      product.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  };
+
+  const getRelatedProducts = (productId: number): TipoProduto[] => {
+    return products.filter((product) => product.id !== productId).slice(0, 3);
+  };
+
+  const getPurchaseHistory = () => {
+    return purchaseHistory;
+  };
+
+  const openQuickView = (product: TipoProduto) => {
+    setQuickViewProduct(product);
+    setIsQuickViewOpen(true);
+  };
+
+  const getTopSellingProducts = (): TipoProduto[] => {
+    return products.filter((product) => product.price > 500);
+  };
+
+  const getFreeShippingOrDiscount = (cartTotal: number): string => {
+    const freeShippingThreshold = 500;
+    const discountRate = 0.1;
+
+    if (cartTotal > freeShippingThreshold) {
+      return "Frete Grátis";
+    } else if (cartTotal > 300) {
+      return `Desconto de ${(discountRate * 100).toFixed(0)}% aplicado!`;
+    } else {
+      return "Nenhum desconto disponível";
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#061f2c] to-[#0d3441] text-gray-100">
+      <Cabecalho />
 
-      {/* Header Fixo */}
-      <Cabecalho/>
       <header className="fixed top-0 left-0 right-0 bg-[#C0A554] shadow-lg z-50">
         <div className="px-4 py-3 flex justify-between items-center">
           <h1 className="text-2xl font-bold text-white">AutoPeças</h1>
-          <button 
-            onClick={() => setIsCartOpen(!isCartOpen)}
-            className="relative p-2 text-white hover:text-[#FFD700] transition"
-          >
-          
+          <button onClick={() => setIsCartOpen(!isCartOpen)} className="relative p-2 text-white hover:text-[#FFD700] transition">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h18M3 9h18M3 15h18M3 21h18" />
+            </svg>
             {cart.length > 0 && (
               <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                 {cart.length}
@@ -74,81 +130,137 @@ export default function ShopPage() {
         </div>
       </header>
 
+      {/* Carrinho de Compras Modal */}
+      {isCartOpen && (
+        <div className="fixed right-0 top-16 bg-white w-80 p-6 rounded-l-lg shadow-lg z-50">
+          <h2 className="text-xl font-bold mb-4">Carrinho de Compras</h2>
+          {cart.length === 0 ? (
+            <p className="text-gray-600">O carrinho está vazio.</p>
+          ) : (
+            <ul>
+              {cart.map((item, index) => (
+                <li key={index} className="flex justify-between mb-2">
+                  <span>{item.name}</span>
+                  <span>R$ {item.price.toFixed(2)}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+          <div className="flex justify-between font-bold mt-4">
+            <span>Total:</span>
+            <span>R$ {getTotal().toFixed(2)}</span>
+          </div>
+          <div className="flex mt-4 space-x-4">
+            <button
+              onClick={() => setIsCartOpen(false)}
+              className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
+            >
+              Fechar
+            </button>
+            <button
+              onClick={checkout}
+              className="flex-1 bg-[#C0A554] hover:bg-[#FFD700] text-white font-bold py-2 px-4 rounded"
+            >
+              Finalizar Compra
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Espaçamento para o header fixo */}
       <div className="pt-20">
-        {/* Lista de Produtos */}
-        <section className="px-6 py-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {products.map((product) => (
-            <article key={product.id} className="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
-              <div className="relative pt-[75%] bg-gray-100">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="absolute top-0 left-0 w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-4">
-                <h3 className="text-lg font-semibold text-[#061f2c] line-clamp-2">{product.name}</h3>
-                <p className="text-[#C0A554] font-bold mt-1">R$ {product.price.toFixed(2)}</p>
+
+        {/* Seção de Produtos em Destaque */}
+        <section className="px-6 py-8">
+          <h2 className="text-xl font-bold text-[#C0A554]">Produtos em Destaque</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {getFeaturedProducts().map((product) => (
+              <div key={product.id} className="bg-white rounded-lg shadow-lg p-4">
+                <img src={product.image} alt={product.name} className="w-full h-48 object-cover rounded-md mb-4" />
+                <h3 className="text-lg font-semibold text-[#061f2c]">{product.name}</h3>
+                <p className="text-[#C0A554] font-bold">R$ {product.price.toFixed(2)}</p>
                 <button
                   onClick={() => addToCart(product.name, product.price)}
-                  className="mt-3 w-full bg-[#C0A554] text-white py-2 rounded-md text-sm font-medium hover:bg-[#a88f47] transition-colors"
+                  className="mt-4 w-full bg-[#C0A554] hover:bg-[#FFD700] text-white font-bold py-2 rounded"
                 >
                   Adicionar ao Carrinho
                 </button>
               </div>
-            </article>
+            ))}
+          </div>
+        </section>
+
+        {/* Seção de Produtos com Desconto */}
+        <section className="px-6 py-8">
+          <h2 className="text-xl font-bold text-[#C0A554]">Produtos com Desconto</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {getDiscountedProducts(0.2).map((product) => (
+              <div key={product.id} className="bg-white rounded-lg shadow-lg p-4">
+                <img src={product.image} alt={product.name} className="w-full h-48 object-cover rounded-md mb-4" />
+                <h3 className="text-lg font-semibold text-[#061f2c]">{product.name}</h3>
+                <p className="line-through text-gray-400">R$ {product.price.toFixed(2)}</p>
+                <p className="text-[#C0A554] font-bold">R$ {(product.price * 0.8).toFixed(2)}</p>
+                <button
+                  onClick={() => addToCart(product.name, product.price * 0.8)}
+                  className="mt-4 w-full bg-[#C0A554] hover:bg-[#FFD700] text-white font-bold py-2 rounded"
+                >
+                  Adicionar ao Carrinho
+                </button>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Seção de Mais Vendidos */}
+        <section className="px-6 py-8">
+          <h2 className="text-xl font-bold text-[#C0A554]">Mais Vendidos</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {getTopSellingProducts().map((product) => (
+              <div key={product.id} className="bg-white rounded-lg shadow-lg p-4">
+                <img src={product.image} alt={product.name} className="w-full h-48 object-cover rounded-md mb-4" />
+                <h3 className="text-lg font-semibold text-[#061f2c]">{product.name}</h3>
+                <p className="text-[#C0A554] font-bold">R$ {product.price.toFixed(2)}</p>
+                <button
+                  onClick={() => addToCart(product.name, product.price)}
+                  className="mt-4 w-full bg-[#C0A554] hover:bg-[#FFD700] text-white font-bold py-2 rounded"
+                >
+                  Adicionar ao Carrinho
+                </button>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Seção de Avaliações */}
+        <section className="px-6 py-8">
+          <h2 className="text-xl font-bold text-[#C0A554]">Avaliações dos Clientes</h2>
+          {feedbacks.map((feedback, index) => (
+            <div key={index} className="bg-gray-100 p-4 rounded-lg shadow-md">
+              <h4 className="text-[#061f2c] font-semibold">{feedback.userName}</h4>
+              <p className="text-sm text-gray-600">{feedback.comment}</p>
+              <p className="text-[#C0A554]">Nota: {feedback.rating}/5</p>
+            </div>
           ))}
         </section>
 
-        {/* Carrinho Móvel (Slide-in) */}
-        <div className={`fixed inset-0 bg-black bg-opacity-50 z-50 transition-opacity ${isCartOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-          <div className={`fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl transform transition-transform ${isCartOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-            <div className="p-6 h-full flex flex-col">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold text-[#061f2c]">Seu Carrinho</h2>
-                <button 
-                  onClick={() => setIsCartOpen(false)}
-                  className="p-2 text-[#061f2c] hover:text-[#C0A554]"
-                >
-                  
-                </button>
-              </div>
-
-              <div className="flex-grow overflow-y-auto">
-                {cart.length === 0 ? (
-                  <p className="text-gray-500 text-center mt-8">Seu carrinho está vazio</p>
-                ) : (
-                  <div className="space-y-4">
-                    {cart.map((item, index) => (
-                      <div key={index} className="flex justify-between items-center p-3 bg-gray-50 rounded shadow-sm">
-                        <span className="text-[#061f2c]">{item.name}</span>
-                        <span className="text-[#C0A554] font-semibold">R$ {item.price.toFixed(2)}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              <div className="mt-auto border-t border-gray-200 pt-4">
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-lg font-semibold text-[#061f2c]">Total:</span>
-                  <span className="text-lg font-bold text-[#C0A554]">R$ {getTotal().toFixed(2)}</span>
-                </div>
-
-                <button
-                  onClick={checkout}
-                  disabled={cart.length === 0}
-                  className="w-full bg-[#C0A554] text-white py-3 rounded-lg font-semibold disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-[#a88f47] transition-colors"
-                >
-                  Finalizar Compra
-                </button>
-              </div>
+        {/* Seção de Histórico de Compras */}
+        <section className="px-6 py-8">
+          <h2 className="text-xl font-bold text-[#C0A554]">Histórico de Compras</h2>
+          {getPurchaseHistory().map((purchase, index) => (
+            <div key={index} className="bg-gray-100 p-4 rounded-lg shadow-md mb-4">
+              <h4 className="text-[#061f2c] font-semibold">Data: {purchase.date}</h4>
+              <ul>
+                {purchase.items.map((item, i) => (
+                  <li key={i} className="text-sm text-gray-600">
+                    {item.name} - R$ {item.price.toFixed(2)}
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
-        </div>
+          ))}
+        </section>
 
-        <Footer/>
+        <Footer />
       </div>
     </div>
   );

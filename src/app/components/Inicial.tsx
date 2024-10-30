@@ -1,15 +1,14 @@
 
 import Image from "next/image";
 import inicial from "/public/images/imageminicial.png";
-import bot from "/public/images/icone bot.png";''
-
+import bot from "/public/images/icone bot.png";
 import Carrossel from "./Conteudo1";
+
 
 function Inicial() {
     return (
         <>
             <div className="bg-gradient-to-r from-[#061f2c] to-[#0c3a4a]">
-
                 {/* Seção inicial com áreas de navegação */}
                 <div className="w-full max-w-6xl p-8 bg-gradient-to-r from-[#B89746] to-[#D2B469] rounded-2xl shadow-lg mx-auto">
                     <div className="flex justify-between items-center mb-8">
@@ -49,8 +48,8 @@ function Inicial() {
                 <div className="w-4/5 h-0.5 bg-gradient-to-r from-[#C0A554] to-black my-8 mx-auto"></div>
 
                 {/* Seção de Galeria */}
-                  {/* Carrossel */}
-          
+                {/* Carrossel */}
+
                 {/* Seção de Nossos Seguros */}
                 <section className="text-center">
                     <h2 className="text-4xl text-[#C0A554] italic mb-8 uppercase tracking-wider">Nossos Seguros</h2>
@@ -102,6 +101,9 @@ function Inicial() {
                         </div>
                     </div>
                 </section>
+
+                {/* Adicionando o Chatbot na parte inferior */}
+               
             </div>
         </>
     );
