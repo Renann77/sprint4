@@ -13,6 +13,7 @@ export default function Menu(){
                 <li><GrProductHunt className="gap-2 w-9" /><Link href={'/produtos'}>Produtos</Link></li>
                 <li><FaCartShopping className="gap-20 w-9" /><Link href={'/comprra'}>Compra De Peças </Link></li>
                 <li><FaCarSide className="gap-2 w-9" />  <Link href={'/produtos/cad-produtos'}>Cadastro de Carros</Link></li>
+                <li><FaCarSide className="gap-2 w-9" />  <Link href={'/pages'}>Cadastro de Carros</Link></li>
             </ul>
         </nav>
     )

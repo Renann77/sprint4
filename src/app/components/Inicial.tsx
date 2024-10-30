@@ -1,7 +1,7 @@
 import Image from "next/image";
 import inicial from "/public/images/imageminicial.png";
 import bot from "/public/images/icone bot.png";
-import Carrossel from "./Conteudo1";
+import Carrossel from "./CarroForm";
 
 
 function Inicial() {
