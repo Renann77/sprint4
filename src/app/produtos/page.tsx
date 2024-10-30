@@ -52,11 +52,11 @@ export default function Produtos(){
 
             <Cabecalho/>
             
-            <h1 className="text-center text-4xl font-bold text-indigo-600 mb-4">Produtos</h1>
+            <h1 className="text-center text-4xl font-boldbg-[#C0A554] mb-4">Cadastro de carros</h1>
             <table className="w-2/3 m-auto">
                 <thead className="bg-slate-900 text-white">
                     <tr>
-                        <th>Id</th><th>Nome</th><th>Preço</th><th>estoque</th><th></th>
+                        <th>Id</th><th>Nome</th><th>Modelo</th><th>carros cadastrados</th><th></th>
                     </tr>
                 </thead>
                 <tbody>
