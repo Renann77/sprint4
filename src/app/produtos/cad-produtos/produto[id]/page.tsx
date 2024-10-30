@@ -10,7 +10,7 @@ export default function Produto({params}:{params:{id:number}}){
     const [produto, setProduto] = useState<TipoProduto>({
         id:0,
         nome:'',
-        preco:0,
+        modelo:'',
         estoque:0
     })
 
@@ -47,7 +47,7 @@ export default function Produto({params}:{params:{id:number}}){
             const response = await fetch(`http://localhost:3000/api/base-produtos/${id}`,cabecalho)
             if(response.ok){
                 alert('Produto atualizado com sucesso!')
-                setProduto({id:0,nome:'',preco:0,estoque:0})
+                setProduto({id:0,nome:'',modelo:'',estoque:0})
                 navigate.push('/produtos')
             }else{
                 alert('Erro ao atualizar produto!')
@@ -71,7 +71,7 @@ export default function Produto({params}:{params:{id:number}}){
                 </div>
                 <div className="flex flex-col p-2">
                     <label className="text-gray-700" htmlFor="idpreco">Preço</label>
-                    <input className="border border-gray-700 p-1 rounded-md" type="number" step={'0.01'} name="preco" value={produto.preco} id="idpreco" 
+                    <input className="border border-gray-700 p-1 rounded-md" type="number" step={'0.01'} name="preco" value={produto.modelo} id="idpreco" 
                     onChange={handleChange}/>
                 </div>
                 <div className="flex flex-col p-2">

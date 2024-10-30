@@ -1,13 +1,22 @@
-import { ModalProps } from "@/types"
+import React from 'react';
 
-export default function Modal({open, onClose, children}:ModalProps){
+interface ModalProps {
+    open: boolean;
+    onClose: () => void;
+    children: React.ReactNode;
+}
 
-    return(
-        <div onClick={onClose} className={`fixed inset-0 flex justify-center items-center transition-colors ${open ? "visible bg-black/20":"invisible"}`}>
-            <div onClick={(e)=>{e.stopPropagation()}} className={`bg-white rounded-lg shadow p-6 transition-all ${open ? "scale-100 opacity-100":"scale-125 opacity-0"}`}>
-                <button onClick={onClose}  className="absolute top-1 right-2 p-1 rounded-lg text-gray-400 bg-white hover:bg-gray-50 hover:text-gray-600">X</button>
+const Modal: React.FC<ModalProps> = ({ open, onClose, children }) => {
+    if (!open) return null;
+
+    return (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="bg-white p-5 rounded shadow-lg">
+                <button className="absolute top-2 right-2" onClick={onClose}>X</button>
                 {children}
             </div>
         </div>
-    )
-}
+    );
+};
+
+export default Modal;
