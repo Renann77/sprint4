@@ -1,4 +1,8 @@
 import React from 'react';
+import { FaFacebookSquare } from "react-icons/fa";
+import { FaInstagramSquare } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+
 
 const Footer: React.FC = () => {
     return (
@@ -34,12 +38,15 @@ const Footer: React.FC = () => {
                     <h4 className="text-2xl font-bold text-yellow-500 mb-4">Siga-nos</h4>
                     <div className="flex justify-center lg:justify-start space-x-6">
                         <a href="https://facebook.com" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-yellow-500 transform hover:scale-110 transition duration-300">
+                        <FaFacebookSquare />
                             <i className="fab fa-facebook text-3xl"></i>
                         </a>
                         <a href="https://twitter.com" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-yellow-500 transform hover:scale-110 transition duration-300">
+                        <FaXTwitter />
                             <i className="fab fa-twitter text-3xl"></i>
                         </a>
                         <a href="https://instagram.com" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-yellow-500 transform hover:scale-110 transition duration-300">
+                        <FaInstagramSquare />
                             <i className="fab fa-instagram text-3xl"></i>
                         </a>
                     </div>
