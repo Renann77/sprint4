@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import Cabecalho from "./components/Cabecalho";
 import Footer from "./components/Footer";
 import Inicial from "./components/Inicial";

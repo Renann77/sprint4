@@ -1,7 +1,7 @@
 import Image from "next/image";
 import inicial from "/public/images/imageminicial.png";
 import bot from "/public/images/icone bot.png";
-import Carrossel from "./CarroForm";
+
 
 
 function Inicial() {
@@ -11,8 +11,8 @@ function Inicial() {
                 {/* Seção inicial com áreas de navegação */}
                 <div className="w-full max-w-6xl p-8 bg-gradient-to-r from-[#B89746] to-[#D2B469] rounded-2xl shadow-lg mx-auto">
                     <div className="flex justify-between items-center mb-8">
-                        <div className="text-xl text-black cursor-pointer transition-all duration-300 hover:text-white hover:scale-110">Ajuda</div>
-                        <div className="text-xl text-black cursor-pointer transition-all duration-300 hover:text-white hover:scale-110">Serviços</div>
+                        <div className="text-xl text-black cursor-pointer transition-all duration-300 hover:text-white hover:scale-110"></div>
+                        <div className="text-xl text-black cursor-pointer transition-all duration-300 hover:text-white hover:scale-110"></div>
                     </div>
 
                     {/* Área do Cliente */}

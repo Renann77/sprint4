@@ -32,10 +32,10 @@ const CarroForm: FC<CarroFormProps> = ({ carregarCarros, carroSelecionado, setCa
     e.preventDefault();
     try {
       if (carroSelecionado) {
-        await axios.put("/api/carros", { id: carroSelecionado.id, marca, modelo, ano });
+        await axios.put("/pages/api", { id: carroSelecionado.id, marca, modelo, ano });
         setCarroSelecionado(null);
       } else {
-        await axios.post("/api/carros", { marca, modelo, ano });
+        await axios.post("/pages/api/", { marca, modelo, ano });
       }
       carregarCarros();
     } catch (error) {

@@ -14,6 +14,8 @@ export default function Menu(){
                 <li><FaCartShopping className="gap-20 w-9" /><Link href={'/comprra'}>Compra De Peças </Link></li>
                 
                 <li><FaCarSide className="gap-2 w-9" />  <Link href={'/pages'}>Cadastro de Carros</Link></li>
+
+                <li>  <Link href={'/servicos'}>Serviços</Link></li>
             </ul>
         </nav>
     )
