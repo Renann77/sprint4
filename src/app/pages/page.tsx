@@ -6,6 +6,8 @@ import CarroForm from "../components/CarroForm";
 import CarroItem from "../components/CarroItem";
 import { Carro } from "@/types";
 import { Search, Plus, Car, RefreshCw, AlertCircle } from "lucide-react";
+import Cabecalho from "../components/Cabecalho";
+import Footer from "../components/Footer";
 
 export default function Home() {
   const [carros, setCarros] = useState<Carro[]>([]);
@@ -64,6 +66,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+    <Cabecalho/>
       {/* Header */}
       <div className="bg-white shadow-sm sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -168,6 +171,8 @@ export default function Home() {
           </div>
         )}
       </main>
+
+      <Footer/>
     </div>
   );
 }
