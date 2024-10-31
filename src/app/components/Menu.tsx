@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { FaHome } from "react-icons/fa";
-
+import { GrBusinessService } from "react-icons/gr";
 import { FaCartShopping } from "react-icons/fa6";
 import { FaCarSide } from "react-icons/fa";
 
@@ -15,7 +15,7 @@ export default function Menu(){
                 
                 <li><FaCarSide className="gap-2 w-9" />  <Link href={'/pages'}>Cadastro de Carros</Link></li>
 
-                <li>  <Link href={'/servicos'}>Serviços</Link></li>
+                <li><GrBusinessService />  <Link href={'/servicos'}>Serviços</Link></li>
             </ul>
         </nav>
     )

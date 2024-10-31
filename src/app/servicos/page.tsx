@@ -1,7 +1,11 @@
 "use client"
 
 // pages/servicos.tsx
+import Image from "next/image";
 import { useState } from 'react';
+import Cabecalho from '../components/Cabecalho';
+import Footer from '../components/Footer';
+import logo from '/public/images/logo.jpg'; 
 
 // Definindo os tipos
 interface Servico {
@@ -74,10 +78,17 @@ const Servicos = () => {
 
     return (
         <>
+
+        <Cabecalho/>
             <div className="bg-gradient-to-r from-[#0d1b2a] to-[#1b2a6b] min-h-screen">
                 <div className="w-full max-w-4xl p-8 bg-white rounded-lg shadow-lg mx-auto mt-10">
                     <header className="flex justify-between items-center mb-8">
-                        <h1 className="text-2xl text-[#1b2a6b] font-bold">Logo</h1>
+                    <Image 
+                src={logo}  
+                alt="Logo da Lri Companny" 
+                 className="w-[70px] h-[70px] rounded-full shadow-lg transition-transform transition-shadow duration-400 ease-in-out transform hover:scale-110 hover:rotate-[5deg] hover:shadow-[0_16px_32px_rgba(243,213,132,0.5)]"
+            
+            />
                         <nav className="text-lg text-[#1b2a6b]">
                             <a href="#" className="hover:text-[#d75b5b] transition duration-300">Menu</a>
                         </nav>
@@ -184,6 +195,8 @@ const Servicos = () => {
                     </section>
                 </div>
             </div>
+
+            <Footer/>
         </>
     );
 }
