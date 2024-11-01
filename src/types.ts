@@ -7,16 +7,23 @@ export interface TipoCarro {
 }
 
 
-export interface Carro {
-    id: number;
-    marca: string;
-    modelo: string;
-    ano: number;
-  }
+
 
  export interface CarroFormProps {
     carregarCarros: () => void;
     carroSelecionado: Carro | null;
     setCarroSelecionado: (carro: Carro | null) => void;
-    onComplete: () => void; // Adicionando a nova prop como opcional
+    onComplete: () => void;
   }
+
+ 
+
+// types.ts
+
+export interface Carro {
+  id: number; // ou string
+  modelo: string;
+  marca: string;
+  ano?: number; // opcional
+  cor?: string; // agora opcional
+}

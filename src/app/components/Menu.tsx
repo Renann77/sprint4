@@ -6,21 +6,35 @@ import { GrBusinessService } from "react-icons/gr";
 import { FaCartShopping } from "react-icons/fa6";
 import { FaCarSide } from "react-icons/fa";
 
-export default function Menu(){
-
-    return(
-        <nav className="flex">
-            <ul className="flex gap-7 links">
-                <li><FaHome className="gap-2 w-9"/><Link href={'/'}>Home</Link></li>
+export default function Menu() {
+    return (
+        <nav className="flex justify-center py-4 bg-gray-800 rounded-lg ">
+            <ul className="flex flex-wrap gap-8 text-white">
+                <li className="flex items-center">
+                    
+                    <Link href="/"><FaHome className="w-6 h-6 mr-2" />Home </Link>
+                </li>
                 
-                <li><FaCartShopping className="gap-20 w-9" /><Link href={'/comprra'}>Compra De Peças </Link></li>
+                <li className="flex items-center">
+                    
+                    <Link  href="/comprra"><FaCartShopping className="w-6 h-6 mr-2 " />Compra de Peças</Link>
+                </li>
                 
-                <li><FaCarSide className="gap-2 w-9" />  <Link href={'/pages'}>Cadastro de Carros</Link></li>
+                <li className="flex items-center">
+                    
+                    <Link href="/pages"><FaCarSide className="w-6 h-6 mr-2" />Gerenciamento de Veiculos</Link>
+                </li>
 
-                <li><GrBusinessService />  <Link href={'/servicos'}>Serviços</Link></li>
+                <li className="flex items-center">
+                    
+                    <Link href="/servicos"><GrBusinessService className="w-6 h-6 mr-2" />Serviços</Link>
+                </li>
 
-                <li><GrBusinessService />  <Link href={'/cliente'}>Cliente</Link></li>
+                <li className="flex items-center">
+                   
+                    <Link href="/cliente"> <GrBusinessService className="w-6 h-6 mr-2" />Clientes </Link>
+                </li>
             </ul>
         </nav>
-    )
+    );
 }

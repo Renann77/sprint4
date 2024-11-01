@@ -5,10 +5,11 @@
 
 
 body {
+  font-size: 16px;
   font-family: 'Roboto', sans-serif;
   background-color: #061f2c;
-  margin: 0;
-  padding: 0;
+  margin: 0px;
+  padding: 0px;
   color: #C0A554;
   overflow-x: hidden;
 }
@@ -36,9 +37,7 @@ button:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.card-header {
-  margin-bottom: 20px;
-}
+
 
 .log {
   font-size: 1.5rem;
@@ -82,3 +81,81 @@ input[type="submit"]:hover {
 
 
 
+
+
+  
+/* Media Queries */
+
+/* Para dispositivos móveis (smartphones) */
+@media only screen and (max-width: 480px) {
+  body {
+      padding: 10px;
+      background-color: #e0e0e0; /* Fundo diferente em smartphones */
+  }
+
+  h1 {
+      font-size: 1.5em; /* Título menor */
+  }
+
+  p {
+      font-size: 0.9em; /* Texto menor */
+  }
+}
+
+/* Para tablets */
+@media only screen and (max-width: 768px) {
+  h1 {
+      font-size: 1.75em; /* Título um pouco menor */
+  }
+
+  p {
+      font-size: 1em; /* Texto no tamanho padrão */
+  }
+}
+
+/* Para laptops */
+@media only screen and (max-width: 1024px) {
+  body {
+      padding: 15px; /* Um pouco mais de espaço */
+  }
+
+  h1 {
+      font-size: 2em; /* Título normal */
+  }
+}
+
+/* Para desktops menores */
+@media only screen and (max-width: 1280px) {
+  body {
+      max-width: 900px; /* Limitar a largura em desktops menores */
+      margin: auto; /* Centralizar */
+  }
+}
+
+/* Para desktops grandes */
+@media only screen and (min-width: 1281px) {
+  body {
+      max-width: 1200px; /* Largura maior para desktops grandes */
+      margin: auto; /* Centralizar */
+  }
+
+  h1 {
+      font-size: 2.5em; /* Título maior */
+  }
+}
+
+/* Para impressão */
+@media print {
+  body {
+      background-color: white; /* Fundo branco para impressão */
+      color: black; /* Texto preto */
+  }
+
+  h1 {
+      font-size: 1.5em; /* Ajuste do tamanho do título */
+  }
+
+  p {
+      font-size: 0.9em; /* Ajuste do tamanho do texto */
+  }
+}
