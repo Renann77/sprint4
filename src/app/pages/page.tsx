@@ -36,7 +36,7 @@ export default function Home() {
     carregarCarros();
   }, []);
 
-  // Limpa a mensagem de sucesso após 3 segundos
+
   useEffect(() => {
     if (successMessage) {
       const timer = setTimeout(() => {
@@ -67,7 +67,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50">
     <Cabecalho/>
-      {/* Header */}
+      
       <div className="bg-white shadow-sm sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
@@ -99,7 +99,7 @@ export default function Home() {
       </div>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Success Message */}
+        
         {successMessage && (
           <div className="mb-4 bg-green-50 border border-green-200 rounded-md p-4">
             <p className="text-sm text-green-600">{successMessage}</p>

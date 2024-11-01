@@ -14,7 +14,7 @@ export default function Home() {
 <Inicial/>
 
 
-{/* Chatbot da sprint 2 */}
+
 
 
 

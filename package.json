@@ -10,11 +10,13 @@
   },
   "dependencies": {
     "@azure/app-configuration": "^1.7.0",
+    "@azure/identity": "^4.5.0",
+    "@azure/keyvault-secrets": "^4.9.0",
     "@typebot.io/js": "^0.3.27",
     "axios": "^1.7.7",
     "lucide-react": "^0.454.0",
     "next": "15.0.0",
-    "oracledb": "^6.6.0",
+    "oci-common": "^2.97.1",
     "react": "19.0.0-rc-65a56d0e-20241020",
     "react-dom": "19.0.0-rc-65a56d0e-20241020",
     "react-icons": "^5.3.0"

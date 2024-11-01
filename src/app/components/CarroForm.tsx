@@ -1,5 +1,4 @@
-// components/CarroForm.tsx
-import { useState, useEffect, FC } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { Carro } from "@/types";
 
@@ -8,13 +7,12 @@ interface CarroFormProps {
   carroSelecionado: Carro | null;
   setCarroSelecionado: (carro: Carro | null) => void;
   onComplete: () => void;
- 
 }
 
-const CarroForm: FC<CarroFormProps> = ({ carregarCarros, carroSelecionado, setCarroSelecionado }) => {
-  const [marca, setMarca] = useState("");
-  const [modelo, setModelo] = useState("");
-  const [ano, setAno] = useState<number | "">("");
+const CarroForm: React.FC<CarroFormProps> = ({ carregarCarros, carroSelecionado, setCarroSelecionado, onComplete }) => {
+  const [marca, setMarca] = useState<string>("");
+  const [modelo, setModelo] = useState<string>("");
+  const [ano, setAno] = useState<number | string>("");
 
   useEffect(() => {
     if (carroSelecionado) {
@@ -28,16 +26,17 @@ const CarroForm: FC<CarroFormProps> = ({ carregarCarros, carroSelecionado, setCa
     }
   }, [carroSelecionado]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      const carroData: Carro = { id: carroSelecionado ? carroSelecionado.id : 0, marca, modelo, ano: Number(ano) };
       if (carroSelecionado) {
-        await axios.put("/pages/api", { id: carroSelecionado.id, marca, modelo, ano });
-        setCarroSelecionado(null);
+        await axios.put("/api/carros", carroData);
       } else {
-        await axios.post("/pages/api/", { marca, modelo, ano });
+        await axios.post("/api/carros", carroData);
       }
       carregarCarros();
+      onComplete();
     } catch (error) {
       console.error("Erro ao salvar carro:", error);
     }
@@ -45,11 +44,10 @@ const CarroForm: FC<CarroFormProps> = ({ carregarCarros, carroSelecionado, setCa
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" placeholder="Marca" value={marca} onChange={(e) => setMarca(e.target.value)} />
-      <input type="text" placeholder="Modelo" value={modelo} onChange={(e) => setModelo(e.target.value)} />
-      <input type="number" placeholder="Ano" value={ano || ""} onChange={(e) => setAno(Number(e.target.value))} />
-      <button type="submit">{carroSelecionado ? "Atualizar Carro" : "Adicionar Carro"}</button>
-      {carroSelecionado && <button onClick={() => setCarroSelecionado(null)}>Cancelar</button>}
+      <input value={marca} onChange={(e) => setMarca(e.target.value)} placeholder="Marca" required />
+      <input value={modelo} onChange={(e) => setModelo(e.target.value)} placeholder="Modelo" required />
+      <input value={ano} onChange={(e) => setAno(e.target.value)} placeholder="Ano" required type="number" />
+      <button type="submit">{carroSelecionado ? "Atualizar" : "Adicionar"}</button>
     </form>
   );
 };
