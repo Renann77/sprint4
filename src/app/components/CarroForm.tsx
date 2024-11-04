@@ -4,10 +4,9 @@ import { Carro } from "@/types"; // ajuste o caminho conforme sua estrutura de p
 interface CarroFormProps {
   onComplete: (novoCarro: Carro) => void;
   carroSelecionado: Carro | null;
-  setCarroSelecionado: (carro: Carro | null) => void;
 }
 
-const CarroForm: React.FC<CarroFormProps> = ({ onComplete, carroSelecionado, setCarroSelecionado }) => {
+const CarroForm: React.FC<CarroFormProps> = ({ onComplete, carroSelecionado }) => {
   const [modelo, setModelo] = useState<string>(carroSelecionado ? carroSelecionado.modelo : "");
   const [marca, setMarca] = useState<string>(carroSelecionado ? carroSelecionado.marca : "");
   const [ano, setAno] = useState<number | undefined>(carroSelecionado ? carroSelecionado.ano : undefined);
