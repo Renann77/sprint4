@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Image from 'next/image';
 
 interface CartItem {
   name: string;
@@ -109,7 +110,7 @@ export default function ShopPage() {
           {products.map((product) => (
             <article key={product.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
               <div className="relative pt-[100%]">
-                <img
+                <Image
                   src={product.image}
                   alt={product.name}
                   className="absolute top-0 left-0 w-full h-full object-cover"

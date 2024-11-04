@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import CarroForm from "../components/CarroForm";
 import CarroItem from "../components/CarroItem";
 import { Carro } from "@/types"; // Certifique-se de que o caminho esteja correto
-import { Search, Plus, Car, RefreshCw, AlertCircle } from "lucide-react";
+import { Search, Plus, Car,AlertCircle } from "lucide-react";
 import Cabecalho from "../components/Cabecalho";
 import Footer from "../components/Footer";
 
