@@ -28,17 +28,7 @@ const products: TipoProduto[] = [
   { id: 8, name: "Kit Chave de Rodas", image: "/images/kit.jpg", price: 169.99 }
 ];
 
-// Exemplo de feedback de clientes
-const feedbacks = [
-  { productId: 1, userName: "João", rating: 4, comment: "Ótima qualidade!" },
-  { productId: 2, userName: "Maria", rating: 5, comment: "Recomendo a todos!" },
-];
 
-// Histórico de compras
-const purchaseHistory = [
-  { date: "2024-10-01", items: [{ name: "Pneu", price: 429.90 }, { name: "Óleo do Motor", price: 79.90 }] },
-  { date: "2024-09-15", items: [{ name: "Pastilhas de Freio", price: 149.99 }] },
-];
 
 export default function ShopPage() {
   const [cart, setCart] = useState<CartItem[]>([]);
