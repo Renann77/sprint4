@@ -70,65 +70,24 @@ export default function ShopPage() {
     }));
   };
 
-  const getProductFeedbacks = (productId: number) => {
-    return feedbacks.filter((feedback) => feedback.productId === productId);
-  };
-
-  const filterProducts = (): TipoProduto[] => {
-    return products.filter((product) =>
-      product.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  };
-
-  const getRelatedProducts = (productId: number): TipoProduto[] => {
-    return products.filter((product) => product.id !== productId).slice(0, 3);
-  };
+ 
 
   const getPurchaseHistory = () => {
     return purchaseHistory;
   };
 
-  const openQuickView = (product: TipoProduto) => {
-    setQuickViewProduct(product);
-    setIsQuickViewOpen(true);
-  };
-
+  
   const getTopSellingProducts = (): TipoProduto[] => {
     return products.filter((product) => product.price > 500);
   };
 
-  const getFreeShippingOrDiscount = (cartTotal: number): string => {
-    const freeShippingThreshold = 500;
-    const discountRate = 0.1;
 
-    if (cartTotal > freeShippingThreshold) {
-      return "Frete Grátis";
-    } else if (cartTotal > 300) {
-      return `Desconto de ${(discountRate * 100).toFixed(0)}% aplicado!`;
-    } else {
-      return "Nenhum desconto disponível";
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#061f2c] to-[#0d3441] text-gray-100">
       <Cabecalho />
 
-      <header className="fixed top-0 left-0 right-0 bg-[#C0A554] shadow-lg z-50">
-        <div className="px-4 py-3 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-white">AutoPeças</h1>
-          <button onClick={() => setIsCartOpen(!isCartOpen)} className="relative p-2 text-white hover:text-[#FFD700] transition">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h18M3 9h18M3 15h18M3 21h18" />
-            </svg>
-            {cart.length > 0 && (
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                {cart.length}
-              </span>
-            )}
-          </button>
-        </div>
-      </header>
+     
 
       {/* Carrinho de Compras Modal */}
       {isCartOpen && (
