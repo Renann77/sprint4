@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import Image from 'next/image'; // Importando o componente Image do Next.js
 import Cabecalho from '../components/Cabecalho';
 import Footer from '../components/Footer';
 
@@ -42,9 +43,6 @@ const purchaseHistory = [
 export default function ShopPage() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [quickViewProduct, setQuickViewProduct] = useState<TipoProduto | null>(null);
-  const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
 
   const addToCart = (itemName: string, itemPrice: number) => {
     setCart([...cart, { name: itemName, price: itemPrice }]);
@@ -70,16 +68,7 @@ export default function ShopPage() {
     }));
   };
 
- 
-
-  const getPurchaseHistory = () => {
-    return purchaseHistory;
-  };
-
   
-  const getTopSellingProducts = (): TipoProduto[] => {
-    return products.filter((product) => product.price > 500);
-  };
 
 
 
@@ -87,7 +76,21 @@ export default function ShopPage() {
     <div className="min-h-screen bg-gradient-to-br from-[#061f2c] to-[#0d3441] text-gray-100">
       <Cabecalho />
 
-     
+      <header className="fixed top-0 left-0 right-0 bg-[#C0A554] shadow-lg z-50">
+        <div className="px-4 py-3 flex justify-between items-center">
+          <h1 className="text-2xl font-bold text-white">AutoPeças</h1>
+          <button onClick={() => setIsCartOpen(!isCartOpen)} className="relative p-2 text-white hover:text-[#FFD700] transition">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h18M3 9h18M3 15h18M3 21h18" />
+            </svg>
+            {cart.length > 0 && (
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                {cart.length}
+              </span>
+            )}
+          </button>
+        </div>
+      </header>
 
       {/* Carrinho de Compras Modal */}
       {isCartOpen && (
@@ -135,7 +138,7 @@ export default function ShopPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {getFeaturedProducts().map((product) => (
               <div key={product.id} className="bg-white rounded-lg shadow-lg p-4">
-                <img src={product.image} alt={product.name} className="w-full h-48 object-cover rounded-md mb-4" />
+                <Image src={product.image} alt={product.name} className="w-full h-48 object-cover rounded-md mb-4" width={200} height={200} />
                 <h3 className="text-lg font-semibold text-[#061f2c]">{product.name}</h3>
                 <p className="text-[#C0A554] font-bold">R$ {product.price.toFixed(2)}</p>
                 <button
@@ -153,30 +156,9 @@ export default function ShopPage() {
         <section className="px-6 py-8">
           <h2 className="text-xl font-bold text-[#C0A554]">Produtos com Desconto</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {getDiscountedProducts(0.2).map((product) => (
+            {getDiscountedProducts(0.1).map((product) => (
               <div key={product.id} className="bg-white rounded-lg shadow-lg p-4">
-                <img src={product.image} alt={product.name} className="w-full h-48 object-cover rounded-md mb-4" />
-                <h3 className="text-lg font-semibold text-[#061f2c]">{product.name}</h3>
-                <p className="line-through text-gray-400">R$ {product.price.toFixed(2)}</p>
-                <p className="text-[#C0A554] font-bold">R$ {(product.price * 0.8).toFixed(2)}</p>
-                <button
-                  onClick={() => addToCart(product.name, product.price * 0.8)}
-                  className="mt-4 w-full bg-[#C0A554] hover:bg-[#FFD700] text-white font-bold py-2 rounded"
-                >
-                  Adicionar ao Carrinho
-                </button>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Seção de Mais Vendidos */}
-        <section className="px-6 py-8">
-          <h2 className="text-xl font-bold text-[#C0A554]">Mais Vendidos</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {getTopSellingProducts().map((product) => (
-              <div key={product.id} className="bg-white rounded-lg shadow-lg p-4">
-                <img src={product.image} alt={product.name} className="w-full h-48 object-cover rounded-md mb-4" />
+                <Image src={product.image} alt={product.name} className="w-full h-48 object-cover rounded-md mb-4" width={200} height={200} />
                 <h3 className="text-lg font-semibold text-[#061f2c]">{product.name}</h3>
                 <p className="text-[#C0A554] font-bold">R$ {product.price.toFixed(2)}</p>
                 <button
@@ -189,38 +171,9 @@ export default function ShopPage() {
             ))}
           </div>
         </section>
-
-        {/* Seção de Avaliações */}
-        <section className="px-6 py-8">
-          <h2 className="text-xl font-bold text-[#C0A554]">Avaliações dos Clientes</h2>
-          {feedbacks.map((feedback, index) => (
-            <div key={index} className="bg-gray-100 p-4 rounded-lg shadow-md">
-              <h4 className="text-[#061f2c] font-semibold">{feedback.userName}</h4>
-              <p className="text-sm text-gray-600">{feedback.comment}</p>
-              <p className="text-[#C0A554]">Nota: {feedback.rating}/5</p>
-            </div>
-          ))}
-        </section>
-
-        {/* Seção de Histórico de Compras */}
-        <section className="px-6 py-8">
-          <h2 className="text-xl font-bold text-[#C0A554]">Histórico de Compras</h2>
-          {getPurchaseHistory().map((purchase, index) => (
-            <div key={index} className="bg-gray-100 p-4 rounded-lg shadow-md mb-4">
-              <h4 className="text-[#061f2c] font-semibold">Data: {purchase.date}</h4>
-              <ul>
-                {purchase.items.map((item, i) => (
-                  <li key={i} className="text-sm text-gray-600">
-                    {item.name} - R$ {item.price.toFixed(2)}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </section>
-
-        <Footer />
       </div>
+
+      <Footer />
     </div>
   );
 }
